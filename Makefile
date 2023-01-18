@@ -1,10 +1,10 @@
 CC=g++
 
 build: 
-	$(CC) -g -o tema1 tema1.cpp -Wall -lpthread
+	$(CC) -g -o map-reduce map-reduce.cpp -Wall -lpthread
 
 run: tema1
-	./tema1
+	./map-reduce
 
 clean:
-	rm tema1
+	rm map-reduce
