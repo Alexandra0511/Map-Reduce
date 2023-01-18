@@ -1,0 +1,27 @@
+Voicila Alexandra
+
+    Pentru parsarea argumentelor citite din linia de comanda am folosit structura
+argumets. Initial am citit aceste argumente folosind functia get_args, apoi
+am incarcat datele in campurile structurii pentru a putea fi trimise ca argument 
+la alte functii si a evita folosirea de variabile globale.
+    Am inceput prelucrarea fisierului de test citit, incarcand numele fisierelor
+in vectorul files. Am initializat vecorul outputMapper care va contine lista 
+contopita a tuturor listelor de la toti mapperii. Apoi, am creat thread-urile
+in functie de id-uri (mapperi vs reduceri), cu functiile lor caracteristice.
+    Astfel, mapperii vor intra pe rand in functia map si, cat timp mai sunt
+fisiere libere de prelucrat, acestia le vor prelua, realizand asttfel o impartire
+echilibrata dinamica in functie de viteza lor prin folosirea unui mutex. Un 
+mapper prelucreaza un fisier prin parcurgerea tuturor numerelor din el. 
+Pentru fiecare astfel de numar, verifica daca se poate scrie in functie de un 
+exponent, prin apelarea functiei binary_s. Se iau toate bazele de la 1 la radical
+din numar (pentru eficienta nu se merge pana la n). Aplicand tehnica binary 
+search se gaseste in mod eficient daca exista o baza care ridicata la exponentul 
+dat este egala cu numarul. Daca exista, numarul va fi adaugat in vectorul 
+corespunzator exponentului din lista de liste a mapper-ului. Pentru a se asigura
+finalizarea tuturor mapperilor, acestia asteaptala bariera.
+    Fiecare reducer este responsabil de cate un exponent. Astfel, fiecare va adauga
+intr-o structura de tip set (pentru a evita duplicatele) valorile din listele interioare
+listei finale rezultate in urma actiunii mapperilor. Urmeaza scrierea in fisierele
+de output a rezultatelor.
+    La final, m-am asigurat de inchiderea tuturor fisierelor si eliberarea structurilor
+folosite.
